@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Neon Rush - Cyberpunk Racing</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div id="error-console"
+        style="display:none; position:fixed; top:0; left:0; width:100%; background:rgba(255,0,0,0.8); color:white; z-index:9999; padding:20px;">
+    </div>
+    <script>
+        window.onerror = function (msg, url, line, col, error) {
+            const div = document.getElementById('error-console');
+            div.style.display = 'block';
+            div.innerHTML += 'Error: ' + msg + '<br>Line: ' + line + '<br>' + error + '<br>';
+        };
+    </script>
+    <div id="game-container">
+        <canvas id="gameCanvas"></canvas>
+
+        <div id="ui-layer">
+            <div class="hud">
+                <div class="score-box">SCORE: <span id="scoreDisplay">0</span></div>
+                <div class="speed-box">SPD: <span id="speedDisplay">0</span> KM/H</div>
+            </div>
+        </div>
+
+        <div id="start-screen">
+            <h1>NEON RUSH</h1>
+            <p style="margin-bottom: 20px; font-size: 0.9em; opacity: 0.8;">USE ARROW KEYS OR TOUCH TO STEER</p>
+
+            <div class="menu-stats" style="margin-bottom: 20px; color: var(--neon-cyan); font-size: 1.2rem;">
+                CREDITS: <span id="menuCoins">0</span> ₵
+            </div>
+
+            <div class="menu-buttons">
+                <button class="btn" id="startBtn">RACE</button>
+                <button class="btn" id="shopBtn">SHOP</button>
+                <button class="btn" id="garageBtn">GARAGE</button>
+            </div>
+        </div>
+
+        <div id="shop-screen" class="screen hidden">
+            <h2>CYBER MARKET</h2>
+            <div class="currency-display">CREDITS: <span id="shopCoins">0</span> ₵</div>
+
+            <div class="tab-container">
+                <button class="tab-btn active" data-tab="cars">VEHICLES</button>
+                <button class="tab-btn" data-tab="upgrades">UPGRADES</button>
+            </div>
+
+            <div class="shop-content" id="shopContent">
+                <!-- Javascript will populate this -->
+            </div>
+
+            <button class="btn back-btn" id="closeShopBtn">BACK</button>
+        </div>
+
+        <div id="garage-screen" class="screen hidden">
+            <h2>GARAGE</h2>
+            <div class="garage-layout">
+                <div class="car-list" id="garageCarList">
+                    <!-- Javascript will populate this -->
+                </div>
+                <div class="car-details">
+                    <h3 id="selectedCarName">NEON RACER I</h3>
+                    <div class="stats-bar">
+                        <span>SPEED</span>
+                        <div class="progress">
+                            <div class="fill" id="statSpeed" style="width: 50%"></div>
+                        </div>
+                    </div>
+                    <div class="stats-bar">
+                        <span>HANDLING</span>
+                        <div class="progress">
+                            <div class="fill" id="statHandling" style="width: 50%"></div>
+                        </div>
+                    </div>
+                    <button class="btn" id="equipBtn">EQUIP</button>
+                </div>
+            </div>
+            <button class="btn back-btn" id="closeGarageBtn">BACK</button>
+        </div>
+
+        <div id="game-over-screen" class="hidden">
+            <h1>CRASHED</h1>
+            <p style="margin-bottom: 20px; font-size: 1.2em;">FINAL SCORE: <span id="finalScore"
+                    style="color:var(--neon-pink)">0</span></p>
+            <button class="btn" id="restartBtn">RETRY</button>
+        </div>
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="main.js"></script>
+</body>
+
+</html>
